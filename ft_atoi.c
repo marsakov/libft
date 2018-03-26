@@ -3,29 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 17:11:01 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/22 17:11:52 by msakovyc         ###   ########.fr       */
+/*   Updated: 2018/03/26 22:12:00 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_atoi(const char *str)
 {
-	int arr[2];
+	int result;
+	int minus;
 
-	arr[0] = 0;
-	arr[1] = 0;
-	while (*str == ' ' || (*str > 9 && *str < 14) || *str == '+')
+	result = 0;
+	minus = 0;
+	while (*str == ' ' || (*str > 8 && *str < 14))
 		str++;
-	if (*str++ == '-')
-		arr[0] = 1;
-	while (*str > 47 && *str < 58)
+	if (*str == '-' || *str == '+')
 	{
-		arr[1] = arr[1] * 10 + *str - 48;
+		if (*str == '-')
+			minus = 1;
 		str++;
 	}
-	if (arr[0])
-		return (-arr[1]);
-	return (arr[1]);
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (int)*str - '0';
+		str++;
+	}
+	if (minus)
+		return (-result);
+	return (result);
 }
