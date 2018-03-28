@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkozhemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 17:52:45 by vkozhemi          #+#    #+#             */
-/*   Updated: 2018/03/23 15:10:52 by vkozhemi         ###   ########.fr       */
+/*   Updated: 2018/03/27 21:52:10 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,20 @@ char	*ft_strnew(size_t size);
 char	*ft_strnstr(const char *haystack, char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strstr(const char *haystack, char *needle);
-int		ft_tolower(char c);
-int		ft_toupper(char c);
+int		ft_tolower(int c);
+int		ft_toupper(int c);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+int		ft_isascii(int c);
+void	ft_strclr(char *s);
+void	ft_striter(char *s, void (*f)(char *));
+void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+char	*ft_strmap(char const *s, char (*f)(char));
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+int		ft_strequ(char const *s1, char const *s2);
+int		ft_strnequ(char const *s1, char const *s2, size_t n);
+char	*ft_strsub(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strtrim(char const *s);
+char	**ft_strsplit(char const *s, char c);
 
 #endif

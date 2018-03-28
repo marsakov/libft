@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/22 18:29:33 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/27 15:37:20 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/03/27 13:35:55 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/03/27 17:10:45 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+int		ft_strequ(char const *s1, char const *s2)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
+	if (!s1 || !s2)
+		return (0);
+	while (*s1 == *s2 && *s1 && s2)
+	{
+		s1++;
+		s2++;
+	}
+	if (*s1 == *s2)
+		return (1);
+	else
+		return (0);
 }

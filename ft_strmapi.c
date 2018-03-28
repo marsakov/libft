@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/22 18:29:33 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/27 15:37:20 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/03/27 13:30:24 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/03/27 17:10:01 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+#include "libft.h"
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
+	int		len;
+	char	*str;
+
+	len = 0;
+	if (!s)
+		return (0);
+	while (*(s + len))
+		len++;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str || !s || !*s)
+		return (0);
+	len = 0;
+	while (*s)
+	{
+		*(str + len) = f(len, *s++);
+		len++;
+	}
+	*(str + len) = '\0';
+	return (str);
 }
