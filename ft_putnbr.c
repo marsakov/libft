@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/23 16:01:32 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/29 22:39:20 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/03/29 19:00:33 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/03/29 21:07:15 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	ft_putnbr(int n)
 {
-	unsigned char	*temp1;
-	unsigned char	*temp2;
+	int ncopy;
+	int n_i;
 
-	temp1 = (unsigned char *)dst;
-	temp2 = (unsigned char *)src;
-	if (!*temp2)
-		return (0);
-	while (n--)
-		*temp1++ = *temp2++;
-	return ((void *)dst);
+	if (n < 0 && n != -2147483648)
+	{
+		ft_putchar('-');
+		n = -n;
+	}
+	if (n == 0)
+		ft_putchar('0');
+	if (n == -2147483648)
+		ft_putstr("-2147483648");
+	ncopy = n;
+	n_i = 1;
+	while ((ncopy /= 10) > 0)
+		n_i *= 10;
+	ncopy = n;
+	while (ncopy > 0)
+	{
+		ft_putchar(ncopy / n_i + 48);
+		ncopy %= n_i;
+		n_i /= 10;
+	}
 }
