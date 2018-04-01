@@ -89,13 +89,11 @@ static	void	ft_fillarr(char const *s, char c, char **arr)
 
 char	**ft_strsplit(char const *s, char c)
 {
-	int		i;
 	char	**arr;
 	int		words;
 	int		i_words;
 	int		*wordslen;
 
-	i = 0;
 	i_words = 0;
 	if (!s)
 		return (NULL);
