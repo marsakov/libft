@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_memitoa(int nbr)
+static	int		ft_memitoa(int nbr)
 {
 	int		iter;
 
@@ -34,7 +34,7 @@ int		ft_memitoa(int nbr)
 	return (iter);
 }
 
-char	*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
 	char	*res;
 	int		iter;

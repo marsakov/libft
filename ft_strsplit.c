@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int		*ft_countalph(char const *s, char c, int words)
+static	int		*ft_countalph(char const *s, char c, int words)
 {
 	int	*wordslen;
 	int counter;
@@ -23,6 +22,8 @@ int		*ft_countalph(char const *s, char c, int words)
 	i = 0;
 	i_words = 0;
 	counter = 0;
+	if (!s || !c || !words)
+		return (0);
 	wordslen = (int *)malloc(sizeof(int) * words);
 	while (s[i] && words)
 	{
@@ -41,14 +42,14 @@ int		*ft_countalph(char const *s, char c, int words)
 	return (wordslen);
 }
 
-int		ft_countwords(char const *s, char c)
+static	int		ft_countwords(char const *s, char c)
 {
 	int	words;
 	int i;
 
 	i = 0;
 	words = 0;
-	if (!s || !*s || !c)
+	if (!s || !c)
 		return (0);
 	while (s[i])
 	{
@@ -59,7 +60,7 @@ int		ft_countwords(char const *s, char c)
 	return (words);
 }
 
-char	**ft_fillarr(char const *s, char c, char **arr)
+static	void	ft_fillarr(char const *s, char c, char **arr)
 {
 	int i;
 	int i_words;
@@ -68,6 +69,8 @@ char	**ft_fillarr(char const *s, char c, char **arr)
 	i = 0;
 	i_words = 0;
 	i_alph = 0;
+	if (!s || !c || !arr)
+		return ;
 	while (s[i])
 	{
 		if (s[i] != c)
@@ -82,8 +85,6 @@ char	**ft_fillarr(char const *s, char c, char **arr)
 		}
 		i++;
 	}
-	//printf("%s %s %s %s %s\n", arr[0], arr[1], arr[2], arr[3], arr[4]);
-	return (arr);
 }
 
 char	**ft_strsplit(char const *s, char c)
@@ -96,28 +97,20 @@ char	**ft_strsplit(char const *s, char c)
 
 	i = 0;
 	i_words = 0;
+	if (!s)
+		return (NULL);
 	words = ft_countwords(s, c);
 	wordslen = ft_countalph(s, c, words);
-	arr = (char **)malloc(sizeof(char *) * (words + 1));
-	if (!arr)
-		return (0);
+	if (!(arr = (char **)malloc(sizeof(char *) * (words + 1))))
+		return (NULL);
 	while (i_words < words)
 	{
-		arr[i_words] = (char *)malloc(sizeof(char) * wordslen[i_words]);
-		if (!arr[i_words])
-			return (0);
+		if (!(arr[i_words] = (char *)malloc(sizeof(char) * wordslen[i_words])))
+			return (NULL);
 		i_words++;
 	}
-	arr = ft_fillarr(s, c, arr);
+	ft_fillarr(s, c, arr);
 	arr[i_words] = NULL;
 	return (arr);
 }
 
-int main()
-{
-	char *s = "      split       this for   me  !       ";
-
-	char **r = ft_strsplit(s, ' ');
-	printf("%s_%s_%s_%s_%s_%s\n", r[0], r[1], r[2], r[3], r[4], r[5]);
-	return (0);
-}
