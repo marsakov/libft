@@ -41,14 +41,13 @@ char	*ft_itoa(int n)
 	int		minus;
 
 	iter = 1;
-	minus = 0;
 	iter = ft_memitoa(n);
+	if ((minus = 0) == 0 && n == 0)
+		return (ft_strdup("0"));
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	if (!(res = (char*)malloc(sizeof(char) * (iter + 1))))
 		return (0);
-	if (n == 0)
-		res[0] = '0';
-	if (n == -2147483648)
-		return (ft_memcpy(res, "-2147483648", 11));
 	res[iter--] = '\0';
 	if (n < 0)
 	{

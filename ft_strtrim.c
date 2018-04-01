@@ -22,10 +22,11 @@ char	*ft_strtrim(char const *s)
 	if (!s)
 		return (0);
 	lensrc = ft_strlen(s) - 1;
-	while ((*(s + len) == ' ' || *(s + len) == '\n' || *(s + len) == '\t') && *(s + len))
+	while ((*(s + len) == ' ' || *(s + len) == '\n' || *(s + len) == '\t')
+		&& *(s + len))
 		len++;
-	while ((*(s + lensrc) == ' ' || *(s + lensrc) == '\n' || *(s + lensrc) == '\t')
-		&& *(s + lensrc) && len < lensrc)
+	while ((*(s + lensrc) == ' ' || *(s + lensrc) == '\n'
+		|| *(s + lensrc) == '\t') && *(s + lensrc) && len < lensrc)
 		lensrc--;
 	strnew = (char *)malloc(sizeof(char) * (lensrc - len + 2));
 	if (!strnew)

@@ -3,95 +3,121 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: msakovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/27 21:51:24 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/29 15:34:07 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/03/30 22:54:44 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/03/30 22:54:51 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-static size_t ft_words_counter(const char *s, char c)
+int		*ft_countalph(char const *s, char c, int words)
 {
-	size_t		i;
-	size_t		word_counter;
-
-	word_counter = 0;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] != c  && (!s[i + 1]  || s[i + 1] == c))
-			word_counter++;
-		i++;
-	}
-	return (word_counter);
-}
-
-static char	**ft_allmem(char **arr, char const *s, char c, size_t word_counter)
-{
-	int			i_word;
-	size_t		i;
-	size_t		counter;
+	int	*wordslen;
+	int counter;
+	int i_words;
+	int i;
 
 	i = 0;
-	i_word = 0;
-	counter = 1;
-	arr = (char **)malloc(sizeof(char *) * (word_counter));
-	if (!arr)
-		return (0);
-	i = 0;
-	while (s[i] && word_counter)
+	i_words = 0;
+	counter = 0;
+	wordslen = (int *)malloc(sizeof(int) * words);
+	while (s[i] && words)
 	{
 		if (s[i] != c)
 		{
-			if (!s[i + 1] || s[i + 1] == c)
-			{
-				arr[i_word] = (char *)malloc(sizeof(char) * (counter + 1));
-				if (!arr[i_word])
-					return (0);
-				word_counter--;
-				counter = 0;
-				i_word++;
-			}
 			counter++;
+			if (s[i + 1] == c || !s[i + 1])
+			{
+				wordslen[i_words++] = counter + 1;
+				counter = 0;
+				words--;
+			}
 		}
 		i++;
 	}
+	return (wordslen);
+}
+
+int		ft_countwords(char const *s, char c)
+{
+	int	words;
+	int i;
+
+	i = 0;
+	words = 0;
+	if (!s || !*s || !c)
+		return (0);
+	while (s[i])
+	{
+		if (s[i] != c && (s[i + 1] == c || !s[i + 1]))
+			words++;
+		i++;
+	}
+	return (words);
+}
+
+char	**ft_fillarr(char const *s, char c, char **arr)
+{
+	int i;
+	int i_words;
+	int i_alph;
+
+	i = 0;
+	i_words = 0;
+	i_alph = 0;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			arr[i_words][i_alph++] = s[i];
+			if (!s[i + 1] || s[i + 1] == c)
+			{
+				arr[i_words][i_alph] = '\0';
+				i_alph = 0;
+				i_words++;
+			}
+		}
+		i++;
+	}
+	//printf("%s %s %s %s %s\n", arr[0], arr[1], arr[2], arr[3], arr[4]);
 	return (arr);
 }
 
 char	**ft_strsplit(char const *s, char c)
 {
-	int			i_word;
-	int			i_alp;
-	char		**arr;
-	size_t		word_counter;
+	int		i;
+	char	**arr;
+	int		words;
+	int		i_words;
+	int		*wordslen;
 
-	if (!s)
-		return (0);
-	i_word = 0;
-	i_alp = 0;
-	word_counter = ft_words_counter(s, c);
-	arr = 0;
-	arr = ft_allmem(arr, s, c, word_counter);
+	i = 0;
+	i_words = 0;
+	words = ft_countwords(s, c);
+	wordslen = ft_countalph(s, c, words);
+	arr = (char **)malloc(sizeof(char *) * (words + 1));
 	if (!arr)
 		return (0);
-	while (*s && word_counter)
+	while (i_words < words)
 	{
-		if (*s != c)
-		{
-			arr[i_word][i_alp++] = *s;
-			if (!*(s + 1) || *(s + 1) == c)
-			{
-				word_counter--;
-				arr[i_word][i_alp] = '\0';
-				i_word++;
-				i_alp = 0;
-			}
-		}
-		s++;
+		arr[i_words] = (char *)malloc(sizeof(char) * wordslen[i_words]);
+		if (!arr[i_words])
+			return (0);
+		i_words++;
 	}
-	arr[i_word] = NULL;
+	arr = ft_fillarr(s, c, arr);
+	arr[i_words] = NULL;
 	return (arr);
+}
+
+int main()
+{
+	char *s = "      split       this for   me  !       ";
+
+	char **r = ft_strsplit(s, ' ');
+	printf("%s_%s_%s_%s_%s_%s\n", r[0], r[1], r[2], r[3], r[4], r[5]);
+	return (0);
 }

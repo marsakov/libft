@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/29 21:01:02 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/30 15:33:47 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/03/30 18:19:49 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/03/30 21:09:39 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	if (n == -2147483648)
-		ft_putstr_fd("-2147483648", fd);
-	else if (n < 0)
+	t_list *res;
+	t_list *begin;
+
+	begin = NULL;
+	if (lst && f)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putnbr_fd(-n, fd);
+		res = f(lst);
+		begin = res;
+		lst = lst->next;
+		while (lst)
+		{
+			res->next = f(lst);
+			res = res->next;
+			lst = lst->next;
+		}
 	}
-	else if (n >= 10)
-		ft_putnbr_fd(n / 10, fd);
-	ft_putchar_fd((n % 10) + 48, fd);
+	return (begin);
 }
