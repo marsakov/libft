@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msakovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/23 20:04:08 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/23 21:01:05 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/04/24 15:09:26 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/04/24 15:09:29 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void	*ft_memalloc(size_t size)
+char	*ft_strnjoin(char const *s1, char const *s2, int n)
 {
-	size_t	*arr;
-	size_t	*begin;
-	void	*res;
+	char	*newstr;
+	size_t	s1len;
+	size_t	s2len;
 
-	arr = (size_t *)malloc(sizeof(size_t) * size);
-	if (!arr)
+	if (!s2)
 		return (0);
-	begin = arr;
-	while (size--)
-		*arr++ = 0;
-	res = (void *)begin;
-	return (res);
+	s1len = ft_strlen(s1);
+	newstr = (char *)malloc(sizeof(char) * (s1len + n + 1));
+	s1len = 0;
+	s2len = 0;
+	if (!newstr)
+		return (0);
+	while (s1 && s1[s1len])
+	{
+		newstr[s1len] = (char)s1[s1len];
+		s1len++;
+	}
+	while (s2[s2len] && n-- > 0)
+		newstr[s1len++] = (char)s2[s2len++];
+	newstr[s1len] = '\0';
+	return (newstr);
 }

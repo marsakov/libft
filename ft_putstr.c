@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-void	ft_putstr(char const *s)
+int		ft_putstr(char const *s)
 {
 	int		i;
 
-	i = 0;
-	while (s && s[i])
-		ft_putchar(s[i++]);
+	i = ft_strlen(s);
+	write(1, s, i);
+	return (i);
 }

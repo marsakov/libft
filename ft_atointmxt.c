@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_atointmxt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msakovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/23 20:04:08 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/23 21:01:05 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/09/15 16:36:24 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/09/15 16:36:28 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-void	*ft_memalloc(size_t size)
+intmax_t	ft_atointmxt(const char *str)
 {
-	size_t	*arr;
-	size_t	*begin;
-	void	*res;
+	intmax_t	result;
+	int			minus;
 
-	arr = (size_t *)malloc(sizeof(size_t) * size);
-	if (!arr)
-		return (0);
-	begin = arr;
-	while (size--)
-		*arr++ = 0;
-	res = (void *)begin;
-	return (res);
+	result = 0;
+	minus = 0;
+	while (*str == ' ' || (*str > 8 && *str < 14))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			minus = 1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (int)*str - '0';
+		str++;
+	}
+	if (minus)
+		return (-result);
+	return (result);
 }

@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_putnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: msakovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/29 18:53:41 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/29 18:54:57 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/05/12 19:59:33 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/05/12 19:59:35 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int	ft_putchar(char c)
+int		ft_putnstr(char const *s, int n)
 {
-	write(1, &c, 1);
-	return (1);
+	int		i;
+
+	i = ft_strlen(s);
+	if (n > i)
+		n = i;
+	write(1, s, n);
+	return (n);
 }

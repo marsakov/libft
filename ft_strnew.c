@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strnew(size_t size)
 {
@@ -21,7 +21,7 @@ char	*ft_strnew(size_t size)
 	if (!temp)
 		return (0);
 	begin = temp;
-	while (size-- && *temp)
+	while (size--)
 		*temp++ = '\0';
 	*temp = '\0';
 	return ((char *)begin);

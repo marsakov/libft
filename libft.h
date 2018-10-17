@@ -26,10 +26,11 @@ typedef struct		s_list
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
-int		isalnum(int c);
-int		isalpha(int c);
-int		isalpha(int c);
+int		ft_isalnum(int c);
+int		ft_isalpha(int c);
+int		ft_isalpha(int c);
 int		ft_isprint(int c);
+int		ft_isprime(int n);
 void	*ft_memalloc(size_t size);
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);

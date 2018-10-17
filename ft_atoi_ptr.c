@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_atoi_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msakovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/23 20:04:08 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/23 21:01:05 by msakovyc         ###   ########.fr       */
+/*   Created: 2018/05/27 18:18:31 by msakovyc          #+#    #+#             */
+/*   Updated: 2018/05/27 18:18:32 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
-
-void	*ft_memalloc(size_t size)
+int		ft_atoi_ptr(const char *str, int *i)
 {
-	size_t	*arr;
-	size_t	*begin;
-	void	*res;
+	int	result;
+	int	minus;
 
-	arr = (size_t *)malloc(sizeof(size_t) * size);
-	if (!arr)
-		return (0);
-	begin = arr;
-	while (size--)
-		*arr++ = 0;
-	res = (void *)begin;
-	return (res);
+	result = 0;
+	minus = 0;
+	while (str[*i] == ' ' || (str[*i] > 8 && str[*i] < 14))
+		(*i)++;
+	if (str[*i] == '-' || str[*i] == '+')
+	{
+		if (str[*i] == '-')
+			minus = 1;
+		(*i)++;
+	}
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		result = result * 10 + (int)str[*i] - '0';
+		(*i)++;
+	}
+	if (minus)
+		return (-result);
+	return (result);
 }

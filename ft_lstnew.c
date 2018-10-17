@@ -6,11 +6,11 @@
 /*   By: msakovyc <msakovyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 15:45:43 by msakovyc          #+#    #+#             */
-/*   Updated: 2018/03/30 17:10:57 by msakovyc         ###   ########.fr       */
+/*   Updated: 2018/04/02 20:32:44 by msakovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
@@ -18,8 +18,8 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 
 	list = (t_list *)malloc(sizeof(t_list));
 	if (!list)
-		return (0);
-	if (content == NULL)
+		return (NULL);
+	if (!content)
 	{
 		list->content = NULL;
 		list->content_size = 0;
@@ -27,11 +27,11 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	else
 	{
 		list->content = (void *)malloc(content_size);
-		if (!content)
-			return (0);
+		if (!list->content)
+			return (NULL);
 		ft_memcpy(list->content, content, content_size);
 		list->content_size = content_size;
-		list->next = NULL;
 	}
+	list->next = NULL;
 	return (list);
 }
