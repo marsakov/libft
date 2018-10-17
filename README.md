@@ -58,7 +58,7 @@ If you try to compile it with gcc using *gcc example.c* you will get an undefine
 
 You have to tell the file where your library resides and which library it is using:
 
-gcc example.c -L. -lft -o example
+	gcc example.c -L. -lft -o example
 
 -L takes the path to your library. . in this case
 -l takes the name of your library. This is the set of characters that come after lib in your library name.
