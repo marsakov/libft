@@ -2,7 +2,7 @@
 #### My implementation of some of the Standard C Library functions including some additional ones.
 
 
-###### What's in it?
+### What's in it?
 As you can see from the Project instructions, there are 4 sections:
 
 Libc Functions: Some of the standard C functions
@@ -38,7 +38,7 @@ toupper			ft_islower
 tolower
 
 
-###### How does it work?
+### How does it work?
 The goal is to create a library called libft.a from the source files so I can later use that library from other projects.
 
 To create that library, after downloading/cloning this project, cd into the project, copy all the files from the sub folders to the root directory and finally, call make:
@@ -51,7 +51,7 @@ You should see a libft.a file and some object files (.o).
 Now to clean up (removing the .o files and the .c files from the root), call *make clean*
 
 
-##### How do I use the library?
+### How do I use the library?
 I added an example file called example.c, it's using the function ft_putstr to print "DON'T PANIC" to the screen.
 
 If you try to compile it with gcc using *gcc example.c* you will get an undefined symbol error for ft_putstr.
